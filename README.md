@@ -72,7 +72,7 @@ Las transacciones que informa el sistema legado son acotadas. Actualmente inform
   - `TRANSFERENCIA_RECIBIDA`: Sólo en pesos y tener presente que va a estar rechaza si no estuvo autorizada.
 
 ## Requerimientos especificos
-![Diagrama Entidad-Relacion](/assets/Diagrama%20(1).svg)
+![Diagrama Entidad-Relacion](/assets/Diagrama%20(2).svg)
 
 El equipo de arquitectura de TI del ITBANK estableció los siguientes `principios`:
   - Se debe utilizar `programación orientada a objetos` para generar la nueva aplicación.
