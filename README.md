@@ -1,6 +1,7 @@
 # Persistencia-de-datos-ITBANK
 Entrega Sprint 6, Persistencia de datos. Programa Full Stack Developer, ITBA - Escuela de Innovación.
 
+<<<<<<< HEAD
 # Segmentacion_de_clientes
 Esta es una aplicación propuesta por la escuela de innovación del ITBA en el SPRINT 5 de su curso de desarrollador fullstack.
 
@@ -121,3 +122,9 @@ Errores y excepciones a tener presentes
 #### Molinas, Nicolás 
 - GitHub - [@NicolasGabM](https://github.com/NicolasGabM)
 - LinkedIn - [Nicolas Gabriel Molinas](https://www.linkedin.com/in/nicolas-gabriel-molinas-20802a216/)
+=======
+Generadores de datos a utilizar:
+
+  https://www.mockaroo.com/
+  https://generatedata.com/generator
+>>>>>>> ebd9ebff25258ecb4aa022ff2631f9280915c863
