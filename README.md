@@ -1,8 +1,10 @@
 # Persistencia-de-datos-ITBANK
-Entrega Sprint 6, Persistencia de datos. Programa Full Stack Developer, ITBA - Escuela de Innovación.
+Este repositorio es una manipulacion y actualizacion a una base de datos propuesta por la escuela de innovación del ITBA en el SPRINT 6 de su curso de desarrollador fullstack.
 
-# Segmentacion_de_clientes
-Esta es una aplicación propuesta por la escuela de innovación del ITBA en el SPRINT 5 de su curso de desarrollador fullstack.
+
+
+
+
 
 El banco cuenta con un sistema TPS `Sistema de Procesamiento de Transacciones` que tiene como principal función enviar las transacciones ocurridas, diferenciando si fueron aceptadas o no, `sin indicar la razón`.
 Se busca automatizar el procesamiento de los datos emitidos por el TPS.
@@ -70,6 +72,8 @@ Las transacciones que informa el sistema legado son acotadas. Actualmente inform
   - `TRANSFERENCIA_RECIBIDA`: Sólo en pesos y tener presente que va a estar rechaza si no estuvo autorizada.
 
 ## Requerimientos especificos
+![Diagrama Entidad-Relacion](/assets/Diagrama.svg)
+
 El equipo de arquitectura de TI del ITBANK estableció los siguientes `principios`:
   - Se debe utilizar `programación orientada a objetos` para generar la nueva aplicación.
   - Existe un diagrama de clases estándar en la compañía que sirve como guía, por lo que se pueden cambiar para cubrir las necesidades del proyecto.
@@ -90,20 +94,13 @@ Se pide que el reporte sea una `página en HTML` válida de forma que el browser
 La salida del sistema TPS es un `archivo JSON` con las transacciones que debemos procesar.
   
 ## Aclaraciones y acotaciones
-Errores y excepciones a tener presentes
-- Transacciones que dejen el monto en negativo
-- División por cero.
+
 
 ### Referencias
-- [Sistema Legacy](https://www.stackscale.com/es/blog/sistemas-legacy/)
-- Uso de HTML en python:
-  - https://www.geeksforgeeks.org/creating-and-viewing-html-fileswith-python/
-  - https://pypi.org/project/simple-html/
-  - https://streamlit-components-tutorial.netlify.app/helloworld/static-render/
+- [Generador de valores](https://generatedata.com/)
 
 ## Links del proyecto
-- Solution URL: (https://github.com/NicolasKorzusehec/Segmentacion_de_clientes)
-- Live Site URL: (https://nicolaskorzusehec.github.io/Segmentacion_de_clientes/)
+- Solution URL: (https://github.com/EliasUpstein/Persistencia-de-datos-ITBANK)
 
 ## Autores
 #### Korzusehec, Nicolás
