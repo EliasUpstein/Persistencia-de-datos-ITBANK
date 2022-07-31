@@ -28,20 +28,20 @@ CASE customer_id%3
 		"Cuenta Corriente"
 END;
 
-
 --intentando con una subconsulta
+
 UPDATE cuenta
-SET account_type=(
-    SELECT customer_id customer_type_id 
-	FROM cuenta, cliente
-	
-    FROM 
-    (SELECT t.price,t1.id FROM tabla_1 t1
-     JOIN tabla_2 t2 on t1.fk_id1=t2.id 
-     JOIN tabla_3 t3 on t2.fk_id2=t3.id  
-     JOIN tabla_4 t4 on t3.fk_id3=t4.id 
-    ) as pch
-    WHERE pch.id=tabla_1.id
-),
-valor_3=valor_4-valor_1
-WHERE valor_2=1
+	SET account_type = (SELECT clie.customer_name
+	FROM cuenta acco INNER JOIN  cliente clie
+	ON acco.customer_id = clie.customer_id
+	LIMIT 1 OFFSET 0)
+WHERE account_id in( SELECT account_id FROM cuenta LIMIT 1 OFFSET 0)
+
+UPDATE cuenta
+	SET account_type = (SELECT clie.customer_name
+	FROM cuenta acco INNER JOIN  cliente clie
+	ON acco.customer_id = clie.customer_id
+	LIMIT 1 OFFSET 1)
+WHERE account_id in( SELECT account_id FROM cuenta LIMIT 1 OFFSET 1 )
+
+

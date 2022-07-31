@@ -1,3 +1,2 @@
-Solucionar rellenado columna tipo de cuenta en cuenta, ver final del sql generador_de_datos.
 Cargar una tanda mas de datos de direccion, idem datos tarjeta de credito.
 Crear un trigger que dispare antes de hacer el ultimo update en el sql resolucion actual.
