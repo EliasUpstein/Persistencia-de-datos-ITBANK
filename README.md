@@ -32,10 +32,25 @@ modelo de datos permite conocer:
 
 ## Problematica 1
 Se solicita reestructurar la Base de Datos.
-Se partio de una BD que consta de 5 
-Crear en la base de datos los tipos de cliente, de cuenta y marcas de
-tarjeta. Insertar los valores según la información provista en el Sprint
-5
+Se partio de una BD que consta de 5 tablas:
+  - Cliente
+  - Prestamos 
+  - Cuenta
+  - Sucursal
+  - Empleado
+Estas tablas tienen sus campos Foreign Key `FK` creados pero sin su restriccion asignada.  
+
+- Se debe crear en la base de datos los `tipos de cliente`, `tipo de cuenta` y `marcas de tarjeta`. Ademas, agregar la entidad `Tarjeta` y `Direccion`.
+- La entidad `tarjeta` debe contener los atributos necesarios para la operación del home banking: 
+      - Numero (único e irrepetible, con una restricción ante cada inserción que no debe superar 20 números/espacios)
+      - CVV
+      - Fecha de otorgamiento
+      - Fecha Expiración
+      - Tarjeta de crédito o débito.
+
+- Se debe corregir el problema actual de no tener asignada la restriccion de FK en las tablas iniciales.
+- Se debera ingresar parte de los nuevos valores según la información provista en el Sprint 5.
+
 - Agregar la entidad tarjeta teniendo en cuenta los atributos
 necesarios para la operación del home banking (se sugieren los
 siguientes campos Numero (único e irrepetible, con una restricción
