@@ -33,7 +33,7 @@ def tipoClienteACuenta(cuenta, cursor):
             cursor.execute(sql)
             indice = indice + 1
         print("""
-            Se ejecuto el siguiente script iterado por cada cliente
+            --Se ejecuto el siguiente script iterado por cada cliente
             UPDATE cuenta
                     SET account_type = (SELECT clie.customer_type_id
                     FROM cuenta acco INNER JOIN  cliente clie
@@ -44,38 +44,48 @@ def tipoClienteACuenta(cuenta, cursor):
     except exception as e:
         print(e)
 
-#Asigna un customer id a cada tarjeta. Optamos por vincular tal y como estan los customer id, considerando que estarian ordenados de tal formar que los dni de cada cliente fueran de menor a mayor
-def asignarTarjeta(cuenta, cursor):
-    print("")
-    try:
-        indice = 0
-        for row in cuenta:
-            sql = f''' 
-                    UPDATE cuenta
-                    SET account_type = (SELECT clie.customer_type_id
-                    FROM cuenta acco INNER JOIN  cliente clie
-                    ON acco.customer_id = clie.customer_id
-                    LIMIT 1 OFFSET {indice})
-                    WHERE account_id in( SELECT account_id FROM cuenta LIMIT 1 OFFSET {indice})
-                    '''
-            cursor.execute(sql)
-            indice = indice + 1
-        print("""
-            Se ejecuto el siguiente script iterado por cada cliente
-            UPDATE cuenta
-                    SET account_type = (SELECT clie.customer_type_id
-                    FROM cuenta acco INNER JOIN  cliente clie
-                    ON acco.customer_id = clie.customer_id
-                    LIMIT 1 OFFSET {iterador})
-                    WHERE account_id in( SELECT account_id FROM cuenta LIMIT 1 OFFSET {iterador})
-            """)
-    except error as e:
-        print(e)
+#Asigna un customer id a cada tarjeta. Optamos por vincular tal y como estan los customer id, considerando que estarian ordenados de tal formar que los dni de cada cliente fueran de menor a mayor.
+#Se destaca que de igual modo que con los tipos de cuenta es necesario categorizar si un cliente esta habilitado o no a tener una tarjeta de credito, o mas. En esta oasion no se resolvera aun que parte de la solucion propuesta en la solucion del mismo conflicto para los tipos de cuenta.
+def asignarTarjeta(cursor):
+    cursor.execute('SELECT customer_id FROM cliente ORDER by customer_DNI DESC')
+    customer_id = cursor.fetchall()
+    #print(customer_id)
+    indice = 0 
+    while indice < len(customer_id):
+        #Hay que identificar que los valores que trajo customer_id son tuplas de un unico valor.
+        value = customer_id[indice][0] 
+        sql = f''' 
+                UPDATE tarjeta SET customer_id = {value}
+                WHERE card_id IN 
+                (SELECT card_id FROM tarjeta
+                ORDER BY card_id LIMIT 1 OFFSET {indice})
+                '''
+        if indice < 10:
+            print(sql)
+        cursor.execute(sql)
+        indice = indice + 1
 
 
 """Se genera una lista del 1 al 1500, se eliminan los numeros ocupados por las sucursales, los mismos tienen un valor maximo que no supera el id 800. luego se ira creando una lista random que reordene los valores que quedaron"""
 def asignarDireccion():
-    print("")
+    cursor.execute('SELECT branch_address_id FROM sucursal ORDER by branch_address_id') 
+    #Devuelve una lista de tuplas de un elemento.
+    branch_address_id = cursor.fetchall()
+    print(branch_address_id)
+    indice = 1000000 
+    while indice < len(branch_address_id):
+        #Hay que identificar que los valores que trajo customer_id son tuplas de un unico valor.
+        value = branch_address_id[indice][0] 
+        sql = f''' 
+                UPDATE tarjeta SET customer_id = {value}
+                WHERE card_id IN 
+                (SELECT card_id FROM tarjeta
+                ORDER BY card_id LIMIT 1 OFFSET {indice})
+                '''
+        if indice < 10:
+            print(sql)
+        cursor.execute(sql)
+        indice = indice + 1
 
 
 #Se destaca que la ejecucion debe ser en el orden explicitado dado que de lo contario habran fallas en la ejecucion por la necesidad de que existan valores previos o bien referencias a tablas existentes. Vease el resultado del diagrama entidad-relacion en la carpeta assets o bien en el readme.
@@ -117,15 +127,15 @@ if __name__ == "__main__":
     F_path = "problematica1/sql/6_generar_datos_D.sql"
     exSql(F_path, 1)
 
-    #cursor.execute('SELECT * FROM tarjeta')
-    #tarjeta = cursor.fetchall()
-    #tipoClienteACuenta(cuenta, cursor)
+    #Asigna los valores de customer_id a cada tarjeta
+    asignarTarjeta(cursor)
 
+    #Asigna los valores de customer_addres_id a cada cliente y a cada empleado.
+    #asignarDireccion(cursor)
 
     """Ultima etapa generacion de datos en la BD, Se crean los datos de tarjeta de credito, corregir el formato de fechas de la tabla empleados, Se crean los datos random de Las FK nuevas por las nuevas tablas."""
     F_path = "n"
     exSql(F_path)
-
 
     print("Ejecucion completa")
     connection.commit()
