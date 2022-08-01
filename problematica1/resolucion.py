@@ -10,8 +10,9 @@ def exSql(path):
         sqlString = " ".join(data)
         print(sqlString)
         cursor.executescript(sqlString)
-    except:
-        print(f"Ruta {path} No encontrada")
+    except FileNotFoundError:
+        print("Ruta no encontrada.")
+    
 
 """La siguiente ejecucion permite vincular los datos de tipo de cliente de cada cliente en la tabla cuenta, dado que un cliente classic solo puede tener una caja en pesos, a diferencia del cliente black que puede tener caja en dolares y cuenta corriente en pesos"""
 def tipoClienteACuenta(cuenta, cursor):
@@ -61,11 +62,9 @@ if __name__ == "__main__":
     cursor.execute('SELECT * FROM cuenta')
     cuenta = cursor.fetchall()
     tipoClienteACuenta(cuenta, cursor)
-    connection.commit()
-    connection.close()
 
     """Agregando los datos random de tipo de cuenta que respetan el tipo de cliente que es el cliente, ver en detalle el sql especificado."""
-    C_path = "n"
+    C_path = "problematica1/sql/3_generar_datos_B.sql"
     exSql(C_path)
 
     """Agregando los datos random de direccion, ver en detalle el sql especificado."""
@@ -81,6 +80,9 @@ if __name__ == "__main__":
     exSql(F_path)
 
 
+    print("Ejecucion completa")
+    connection.commit()
+    connection.close()
 
 #Agregar una carpeta de src para permitir agrear la bd desde 0 o una similar si asi lo deseara alguien, se debera partir de las mismas condiciones que la inicial.
 #Reintegrar la resolucion de la tarea 3 que hizo elias, creo qeu la elimine sin querer.

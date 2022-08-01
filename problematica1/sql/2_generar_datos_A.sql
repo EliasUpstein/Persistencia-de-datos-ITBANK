@@ -3,7 +3,7 @@ INSERT INTO tipo_cliente (type_name, debit_card, credit_card, current_account, c
 VALUES
 ("classic", "1", "0", "FALSE", "FALSE", "FALSE", "TRUE", "$10000", "1%", "$150000"),
 ("gold", "1", "1", "$10000", "1", "TRUE", "TRUE", "$20000", "0,5", "$50000"),
-("black", "1", "5", "$10000", "2", "TRUE", "TRUE1", "$100000", "0%", "FALSE");
+("black", "1", "5", "$10000", "2", "TRUE", "TRUE", "$100000", "0%", "FALSE");
 
 --Asignando valores parcialemente aleatorios a la columna customer_type_id
 UPDATE cliente
