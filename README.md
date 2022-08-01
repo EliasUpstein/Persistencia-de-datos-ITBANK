@@ -1,14 +1,23 @@
 # Persistencia-de-datos-ITBANK
-Este repositorio es una manipulacion y actualizacion a una base de datos propuesta por la escuela de innovación del ITBA en el SPRINT 6 de su curso de desarrollador fullstack.
+Este repositorio es una manipulacion y actualizacion a una base de datos `BD` propuesta por la escuela de innovación del ITBA en el SPRINT 6 de su curso de desarrollador fullstack.
+
+ITBANK tiene un modelo de datos definido para la operación de su negocio. El
+modelo de datos permite conocer:
+- Los tipos de los datos que hay en la base y la forma en que se relacionan.
+- Las restricciones de integridad
+- Entender cómo llevar adelante operaciones de manipulación de los datos
 
 ## Table of contents
   - [Diagrama Entidad-Relacion Inicial](#diagrama-entidad-relacion-inicial)
   - [Diagrama Entidad-Relacion Reestructurado](#diagrama-entidad-relacion-reestructurado)
-  - [Problematica](#problematica)
+  - [Problematica 1](#problematica-1)
+  - [Problematica 2](#problematica-1)
+  - [Problematica 3](#problematica-1)
+  - [Problematica 4](#problematica-1)
+  
   - [Detalles del desafio](#detalles-del-desafio)
     - Tipos de Clientes
     - Tipos de Cuentas
-    - Transacciones habilitadas
   - [Requerimientos especificos](#requerimientos-especificos)
   - [Aclaraciones y acotaciones](#aclaraciones-y-acotaciones)
     - [Referencias](#referencias)
@@ -21,11 +30,36 @@ Este repositorio es una manipulacion y actualizacion a una base de datos propues
 ## Diagrama Entidad-Relacion Reestructurado
 ![Diagrama Entidad-Relacion](/assets/Diagrama.svg)
 
-## Problematica
-El banco cuenta con un sistema TPS `Sistema de Procesamiento de Transacciones` que tiene como principal función enviar las transacciones ocurridas, diferenciando si fueron aceptadas o no, `sin indicar la razón`. 
-Dicho sistema tiene años de funcionamiento en el banco y fue depurado varias veces, llevando la tasa de errores al mínimo, por lo que se sabe que funciona correctamente. El equipo de TI, identifica este sistema como un `Legacy` o `Legado`. La única salida que provee el sistema, son los datos `crudos` del evento ocurrido con los montos asociados sin ningún procesamiento o información adicional.
-ITBANK tiene distintos tipos de clientes y distintos tipos de cuentas que le puede dar a cada uno. Adicionalmente los clientes pueden tener distintos tipos de tarjetas de crédito y operaciones permitidas según su perfil asociado.
-El área de operaciones del banco está integrada por gente de mucha experiencia en el banco que utiliza planillas propias para poder procesar la salida de datos del TPS. Dado que actualmente ITBANK se encuentra en un proceso de renovación, se están incorporando nuevos empleados al área de referencia. Es por ese motivo que el gerente requiere una `automatización` del procesamiento de los datos emitidos por el TPS. La mejor forma de abordar este problema es generar una aplicación que reciba como input la información del TPS, la procese y emita un reporte que sea capaz de mostrar la razón de porque estas transacciones fueron rechazadas para ponerla a disposición del equipo de atención al cliente. Si son aceptadas simplemente se agrega al reporte la transacción que se hizo sin detalle particular, de esta forma quedara completo el informe.
+## Problematica 1
+Se solicita reestructurar la Base de Datos.
+Se partio de una BD que consta de 5 
+Crear en la base de datos los tipos de cliente, de cuenta y marcas de
+tarjeta. Insertar los valores según la información provista en el Sprint
+5
+- Agregar la entidad tarjeta teniendo en cuenta los atributos
+necesarios para la operación del home banking (se sugieren los
+siguientes campos Numero (único e irrepetible, con una restricción
+ante cada inserción que no debe superar 20 números/espacios), CVV,
+Fecha de otorgamiento, Fecha Expiración). Almacenar si es una
+tarjeta de crédito o débito.
+- Relacionar las tarjetas con la tabla donde se guardan las marcas de
+tarjeta
+- Relacionar las tarjetas con el cliente al que pertenecen
+- Insertar 500 tarjetas de crédito con sus respectivos datos
+(www.generatedata.com) asociándolas a los clientes de forma
+aleatoria
+- Agregar la entidad direcciones, que puede ser usada por los clientes,
+empleados y sucursales con los campos utilizados en el SPRINT 5
+- Insertar 500 direcciones, asignando del lote inicial a empleados,
+clientes o sucursal de forma aleatoria. Teniendo en cuenta que un
+cliente o empleado puede tener múltiples direcciones, pero la
+sucursal, solo una.
+- Ampliar el alcance de la entidad cuenta para que identifique el tipo de
+la misma
+- Asignar un tipo de cuenta a cada registro de cuenta de forma
+aleatoria
+- Corregir el campo employee_hire_date de la tabla empleado con la
+fecha en formato YYYY-MM-DD
 
 ## Detalles del desafio
 ### Tipos de clientes
@@ -61,15 +95,6 @@ El área de operaciones del banco está integrada por gente de mucha experiencia
   - Caja de ahorro en pesos
   - Caja de ahorro en dólares
   - Cuenta Corriente
-
-### Transacciones habilitadas
-Las transacciones que informa el sistema legado son acotadas. Actualmente informa las siguientes transacciones:
-  - `RETIRO_EFECTIVO_CAJERO_AUTOMATICO`: Tener presente que si tiene cuenta corriente puede figurar el valor de saldo en cuenta como negativo hasta el importe del cupo establecido.
-  - `ALTA_TARJETA_CREDITO`: Se solicito una nueva tarjeta de crédito.
-  - `ALTA_CHEQUERA`: Se solicito una nueva chequera.
-  - `COMPRAR_DOLAR`: Se solicito realizar la transacción para comprar dólares, pero solo lo pueden hacer los clientes que tengan cuenta en dólares.
-  - `TRANSFERENCIA_ENVIADA`: Solo se puede en pesos y lo que tenga en caja de ahorro y cuenta corriente debe poder pagar la comisión que se cobra.
-  - `TRANSFERENCIA_RECIBIDA`: Sólo en pesos y tener presente que va a estar rechaza si no estuvo autorizada.
 
 ## Requerimientos especificos
 

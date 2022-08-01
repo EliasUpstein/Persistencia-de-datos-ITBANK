@@ -142,10 +142,16 @@ def asignarDireccion(cursor):
     direccionCliente(idDisponibles,cursor)
    
 
+def pausarEjecucion():
+    if pausar == 1:
+        sol = input("Escriba cualquier cosa para continuar con la proxima ejecucion:  ")
+
 
 #Se destaca que la ejecucion debe ser en el orden explicitado dado que de lo contrario habran fallas en la ejecucion por la necesidad de que existan valores previos o bien referencias a tablas existentes. Vease el resultado del diagrama entidad-relacion en la carpeta assets o bien en el readme.
 #Se destaca que el programa corre unicamente si se escriben los path de los archivo con el divisor '/'. Mas adelante se encarara resolver el conflicto con el modulo os.
 if __name__ == "__main__":
+    pausar = 0 #Si vale 0 permite ver cada ejecucion.
+
     #Creamos la coneccion con la bd
     connection = sqlite3.connect('itbank.db')
     cursor = connection.cursor()
@@ -156,20 +162,28 @@ if __name__ == "__main__":
     #A_path = "problematica1/sql/1_reestructura_bd_A.sql"
     exSql(A_path)
 
+    pausarEjecucion()
+
     """Primer etapa de generacion y asignacion de datos, ver en detalle el scipt comentado"""
     #B_path = "problematica1/sql/2_generar_datos_A.sql"
     B_path = os.path.join("problematica1","sql", "2_generar_datos_A.sql")
     exSql(B_path)
+
+    pausarEjecucion()
 
     """Vinculando los datos de tipo de cliente que habilitan el tipo de cuenta que un cliente puede tener"""
     cursor.execute('SELECT * FROM cuenta')
     cuenta = cursor.fetchall()
     tipoClienteACuenta(cuenta, cursor)
 
+    pausarEjecucion()
+
     """Agregando los datos random de tipo de cuenta que respetan el tipo de cliente que es el cliente, ver en detalle el sql especificado."""
     #C_path = "problematica1/sql/3_generar_datos_B.sql"
     C_path = os.path.join("problematica1","sql", "3_generar_datos_B.sql")
     exSql(C_path)
+
+    pausarEjecucion()
 
     """Creando la tabla direccion y agregando los datos random de direccion.
     Se deben generar 1500 direcciones dado que inequivocamente 500 son exclusivamente para las sucursales, mientras que las otras 1000 pueden relacionarse de tal manera  que se suponga que alguno de los empleados o clientes pueden ser parientes y compartir domicilio. Para facilitar la solucion se opta por generar un domicilio por cada persona. ver en detalle el sql especificado.
@@ -178,20 +192,31 @@ if __name__ == "__main__":
     D_path = os.path.join("problematica1","sql", "4_generar_datos_C.sql")
     exSql(D_path, 1)
 
+    pausarEjecucion()
+
     """Segunda etapa de la reestructuracion de la BD, Se vincula la Fk Sucursal a la tabla Direcciones."""
     #E_path = "problematica1/sql/5_reestructura_bd_B.sql"
     E_path = os.path.join("problematica1","sql", "5_reestructura_bd_B.sql")
     exSql(E_path)
 
+    pausarEjecucion()
+
     """Se crean los datos de marca de tarjeta y de tarjeta creadas."""
     #F_path = "problematica1/sql/6_generar_datos_D.sql"
     F_path = os.path.join("problematica1","sql", "6_generar_datos_D.sql")
     exSql(F_path, 1)
+
+    pausarEjecucion()
+
     #Asigna los valores de customer_id a cada tarjeta
     asignarTarjeta(cursor)
 
+    pausarEjecucion()
+
     #Asigna los valores de customer_addres_id a cada cliente y a cada empleado.
     asignarDireccion(cursor)
+
+    pausarEjecucion()
 
     """Corrige el formato de las fechas de empleados"""
     #G_path = "problematica1/sql/7_formato_fecha.sql"
