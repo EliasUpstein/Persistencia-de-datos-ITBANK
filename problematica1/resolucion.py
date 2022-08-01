@@ -188,7 +188,7 @@ if __name__ == "__main__":
     asignarDireccion(cursor)
 
     """Ultima etapa generacion de datos en la BD, Se crean los datos de tarjeta de credito, corregir el formato de fechas de la tabla empleados, Se crean los datos random de Las FK nuevas por las nuevas tablas."""
-    F_path = "n"
+    F_path = "problematica1/sql/7_formato_fecha.sql"
     exSql(F_path)
 
     print("Ejecucion completa")
