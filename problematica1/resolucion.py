@@ -3,6 +3,7 @@ from distutils.log import error
 from importlib.resources import path
 import sqlite3
 
+#Ejecuta un script de sql referenciado por un path
 def exSql(path):
     try:
         file = open(path, 'r')
@@ -13,7 +14,6 @@ def exSql(path):
     except FileNotFoundError:
         print("Ruta no encontrada.")
     
-
 """La siguiente ejecucion permite vincular los datos de tipo de cliente de cada cliente en la tabla cuenta, dado que un cliente classic solo puede tener una caja en pesos, a diferencia del cliente black que puede tener caja en dolares y cuenta corriente en pesos"""
 def tipoClienteACuenta(cuenta, cursor):
     try:
@@ -40,7 +40,6 @@ def tipoClienteACuenta(cuenta, cursor):
             """)
     except error as e:
         print(e)
-
 
 
 #Se destaca que la ejecucion debe ser en el orden explicitado dado que de lo contario habran fallas en la ejecucion por la necesidad de que existan valores previos o bien referencias a tablas existentes. Vease el resultado del diagrama entidad-relacion en la carpeta assets o bien en el readme.
