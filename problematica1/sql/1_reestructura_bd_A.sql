@@ -40,18 +40,7 @@
 		"max_travel_reception" INTEGER,
 		PRIMARY KEY("customer_type_id" AUTOINCREMENT)
 	);
-	
-	--Tabla direccion
-	CREATE TABLE "direccion"(
-		"address_id" INTEGER NOT NULL,
-		"street" TEXT NOT NULL,
-		"number" INTEGER NOT NULL,
-		"city" TEXT NOT NULL,
-		"province" TEXT NOT NULL,
-		"country" TEXT NOT NULL,
-		PRIMARY KEY("address_id" AUTOINCREMENT)
-	);
-	
+		
 --2do. Agregamos los campos faltantes en las tablas (siendo claves foraneas
 --o campos nuevos).
 	

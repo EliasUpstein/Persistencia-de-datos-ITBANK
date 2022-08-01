@@ -43,6 +43,7 @@ def tipoClienteACuenta(cuenta, cursor):
 
 
 #Se destaca que la ejecucion debe ser en el orden explicitado dado que de lo contario habran fallas en la ejecucion por la necesidad de que existan valores previos o bien referencias a tablas existentes. Vease el resultado del diagrama entidad-relacion en la carpeta assets o bien en el readme.
+#Se destaca que el programa corre unicamente si se escriben los path de los archivo con el divisor '/'. Mas adelante se encarara resolver el conflicto con el modulo os.
 if __name__ == "__main__":
     #Creamos la coneccion con la bd
     connection = sqlite3.connect('./itbank.db')
@@ -67,7 +68,7 @@ if __name__ == "__main__":
     exSql(C_path)
 
     """Agregando los datos random de direccion, ver en detalle el sql especificado."""
-    D_path = "n"
+    D_path = "problematica1/sql/4_generar_datos_C.sql"
     exSql(D_path)
 
     """Segunda etapa de la reestructuracion de la BD, Se vincula la Fk Sucursal a la tabla Direcciones"""
