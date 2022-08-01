@@ -1,9 +1,9 @@
 # Persistencia-de-datos-ITBANK
 Este repositorio es una manipulacion y actualizacion a una base de datos propuesta por la escuela de innovación del ITBA en el SPRINT 6 de su curso de desarrollador fullstack.
 
-
-
 ## Table of contents
+  - [Diagrama Entidad-Relacion Inicial](#diagrama-entidad-relacion-inicial)
+  - [Diagrama Entidad-Relacion Reestructurado](#diagrama-entidad-relacion-reestructurado)
   - [Problematica](#problematica)
   - [Detalles del desafio](#detalles-del-desafio)
     - Tipos de Clientes
@@ -14,6 +14,12 @@ Este repositorio es una manipulacion y actualizacion a una base de datos propues
     - [Referencias](#referencias)
   - [Links](#links)
   - [Autores](#autores)
+
+## Diagrama Entidad-Relacion Inicial
+![Diagrama Entidad-Relacion Inicial](/assets/Diagrama%20Inicial.jpg)
+
+## Diagrama Entidad-Relacion Reestructurado
+![Diagrama Entidad-Relacion](/assets/Diagrama.svg)
 
 ## Problematica
 El banco cuenta con un sistema TPS `Sistema de Procesamiento de Transacciones` que tiene como principal función enviar las transacciones ocurridas, diferenciando si fueron aceptadas o no, `sin indicar la razón`. 
@@ -66,7 +72,6 @@ Las transacciones que informa el sistema legado son acotadas. Actualmente inform
   - `TRANSFERENCIA_RECIBIDA`: Sólo en pesos y tener presente que va a estar rechaza si no estuvo autorizada.
 
 ## Requerimientos especificos
-![Diagrama Entidad-Relacion](/assets/Diagrama.svg)
 
 El equipo de arquitectura de TI del ITBANK estableció los siguientes `principios`:
   - Se debe utilizar `programación orientada a objetos` para generar la nueva aplicación.
