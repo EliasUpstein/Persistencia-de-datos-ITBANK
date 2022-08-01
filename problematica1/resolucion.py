@@ -1,5 +1,6 @@
 from importlib.resources import path
 from logging import exception
+import os
 import sqlite3
 from random import shuffle
 
@@ -142,20 +143,22 @@ def asignarDireccion(cursor):
    
 
 
-#Se destaca que la ejecucion debe ser en el orden explicitado dado que de lo contario habran fallas en la ejecucion por la necesidad de que existan valores previos o bien referencias a tablas existentes. Vease el resultado del diagrama entidad-relacion en la carpeta assets o bien en el readme.
+#Se destaca que la ejecucion debe ser en el orden explicitado dado que de lo contrario habran fallas en la ejecucion por la necesidad de que existan valores previos o bien referencias a tablas existentes. Vease el resultado del diagrama entidad-relacion en la carpeta assets o bien en el readme.
 #Se destaca que el programa corre unicamente si se escriben los path de los archivo con el divisor '/'. Mas adelante se encarara resolver el conflicto con el modulo os.
 if __name__ == "__main__":
     #Creamos la coneccion con la bd
-    connection = sqlite3.connect('./itbank.db')
+    connection = sqlite3.connect('itbank.db')
     cursor = connection.cursor()
 
     """Primer etapa de reestructura de la bd, ver en detalle en el siguiente script comentado. 
     Reestablece las foreign key faltantes, crea las nuevas tablas."""
-    A_path = "problematica1/sql/1_reestructura_bd_A.sql"
+    A_path = os.path.join("problematica1","sql", "1_reestructura_bd_A.sql") 
+    #A_path = "problematica1/sql/1_reestructura_bd_A.sql"
     exSql(A_path)
 
     """Primer etapa de generacion y asignacion de datos, ver en detalle el scipt comentado"""
-    B_path = "problematica1/sql/2_generar_datos_A.sql"
+    #B_path = "problematica1/sql/2_generar_datos_A.sql"
+    B_path = os.path.join("problematica1","sql", "2_generar_datos_A.sql")
     exSql(B_path)
 
     """Vinculando los datos de tipo de cliente que habilitan el tipo de cuenta que un cliente puede tener"""
@@ -164,32 +167,36 @@ if __name__ == "__main__":
     tipoClienteACuenta(cuenta, cursor)
 
     """Agregando los datos random de tipo de cuenta que respetan el tipo de cliente que es el cliente, ver en detalle el sql especificado."""
-    C_path = "problematica1/sql/3_generar_datos_B.sql"
+    #C_path = "problematica1/sql/3_generar_datos_B.sql"
+    C_path = os.path.join("problematica1","sql", "3_generar_datos_B.sql")
     exSql(C_path)
 
     """Creando la tabla direccion y agregando los datos random de direccion.
     Se deben generar 1500 direcciones dado que inequivocamente 500 son exclusivamente para las sucursales, mientras que las otras 1000 pueden relacionarse de tal manera  que se suponga que alguno de los empleados o clientes pueden ser parientes y compartir domicilio. Para facilitar la solucion se opta por generar un domicilio por cada persona. ver en detalle el sql especificado.
     Para los clientes ingresados en la problematica 2 se recurrira a repetir alguna de las direcciones que sean clientes existentes."""
-    D_path = "problematica1/sql/4_generar_datos_C.sql"
+    #D_path = "problematica1/sql/4_generar_datos_C.sql"
+    D_path = os.path.join("problematica1","sql", "4_generar_datos_C.sql")
     exSql(D_path, 1)
 
     """Segunda etapa de la reestructuracion de la BD, Se vincula la Fk Sucursal a la tabla Direcciones."""
-    E_path = "problematica1/sql/5_reestructura_bd_B.sql"
+    #E_path = "problematica1/sql/5_reestructura_bd_B.sql"
+    E_path = os.path.join("problematica1","sql", "5_reestructura_bd_B.sql")
     exSql(E_path)
 
     """Se crean los datos de marca de tarjeta y de tarjeta creadas."""
-    F_path = "problematica1/sql/6_generar_datos_D.sql"
+    #F_path = "problematica1/sql/6_generar_datos_D.sql"
+    F_path = os.path.join("problematica1","sql", "6_generar_datos_D.sql")
     exSql(F_path, 1)
-
     #Asigna los valores de customer_id a cada tarjeta
     asignarTarjeta(cursor)
 
     #Asigna los valores de customer_addres_id a cada cliente y a cada empleado.
     asignarDireccion(cursor)
 
-    """Ultima etapa generacion de datos en la BD, Se crean los datos de tarjeta de credito, corregir el formato de fechas de la tabla empleados, Se crean los datos random de Las FK nuevas por las nuevas tablas."""
-    F_path = "problematica1/sql/7_formato_fecha.sql"
-    exSql(F_path)
+    """Corrige el formato de las fechas de empleados"""
+    #G_path = "problematica1/sql/7_formato_fecha.sql"
+    G_path = os.path.join("problematica1","sql", "7_formato_fecha.sql")
+    exSql(G_path)
 
     print("Ejecucion completa")
     connection.commit()
