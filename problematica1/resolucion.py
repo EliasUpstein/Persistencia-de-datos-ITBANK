@@ -1,6 +1,8 @@
 from importlib.resources import path
 from logging import exception
 import sqlite3
+from random import shuffle
+
 
 #Ejecuta un script de sql referenciado por un path
 def exSql(path, n = 0):
@@ -65,27 +67,79 @@ def asignarTarjeta(cursor):
         cursor.execute(sql)
         indice = indice + 1
 
-
-"""Se genera una lista del 1 al 1500, se eliminan los numeros ocupados por las sucursales, los mismos tienen un valor maximo que no supera el id 800. luego se ira creando una lista random que reordene los valores que quedaron"""
-def asignarDireccion():
+#Crea una lista que extrae de las tuplas los valores de id utilizados en sucursales y los elimina de la lista de ids disponibles
+def disponibleDireccion(cursor):
+    idIniciales = []
+    n = 0
+    while n <= 1500:
+        idIniciales.append(n)
+        n = n + 1 
+    #print(idIniciales)
     cursor.execute('SELECT branch_address_id FROM sucursal ORDER by branch_address_id') 
     #Devuelve una lista de tuplas de un elemento.
     branch_address_id = cursor.fetchall()
-    print(branch_address_id)
-    indice = 1000000 
-    while indice < len(branch_address_id):
+    #print(branch_address_id)
+    for element in branch_address_id:
+        try:
+            idIniciales.remove(element[0])
+        except ValueError:    #Algunos valores de address_id es en las sucursales estan duplicados, es un error
+            print(f"El address_id {element[0]} esta duplicado, va a haber que solucionarlo.")
+    #print(idIniciales)
+    return idIniciales
+
+#Asigna una parte de los ids disponibles a la FK de la tabla empleado
+def direccionEmpleado(disponible, cursor):
+    cursor.execute('SELECT employee_address_id FROM empleado ORDER by employee_id')
+    employee_address_id = cursor.fetchall()
+    #print(employee_address_id)
+    indice = 0 
+    while indice < len(employee_address_id):
         #Hay que identificar que los valores que trajo customer_id son tuplas de un unico valor.
-        value = branch_address_id[indice][0] 
+        value = disponible[indice] 
         sql = f''' 
-                UPDATE tarjeta SET customer_id = {value}
-                WHERE card_id IN 
-                (SELECT card_id FROM tarjeta
-                ORDER BY card_id LIMIT 1 OFFSET {indice})
+                UPDATE empleado SET employee_address_id = {value}
+                WHERE employee_id IN 
+                (SELECT employee_id FROM empleado
+                ORDER BY employee_id LIMIT 1 OFFSET {indice})
                 '''
         if indice < 10:
             print(sql)
         cursor.execute(sql)
+        disponible.remove(value)
         indice = indice + 1
+
+#Asigna una parte de los ids disponibles a la FK de la tabla cliente
+def direccionCliente(disponible, cursor):
+    cursor.execute('SELECT customer_address_id FROM cliente ORDER by customer_id')
+    customer_address_id = cursor.fetchall()
+    #print(len(customer_address_id))
+    indice = 0
+    #print(len(disponible))
+    while indice < len(customer_address_id):
+        #Hay que identificar que los valores que trajo customer_id son tuplas de un unico valor.
+        value = disponible[indice] 
+        print (value)
+        sql = f''' 
+                UPDATE cliente SET customer_address_id = {value}
+                WHERE customer_id IN 
+                (SELECT customer_id FROM cliente
+                ORDER BY customer_id LIMIT 1 OFFSET {indice})
+                '''
+        if indice < 10:
+            print(sql)
+        cursor.execute(sql)
+        #disponible.remove(value)
+        indice = indice + 1
+
+
+"""Se genera una lista del 1 al 1500, se eliminan los numeros ocupados por las sucursales, los mismos tienen un valor maximo que no supera el id 800. luego se ira creando una lista random que reordene los valores que quedaron"""
+def asignarDireccion(cursor):
+    idDisponibles = disponibleDireccion(cursor)
+    shuffle(idDisponibles) #Randomiza los id disponibles
+    direccionEmpleado(idDisponibles,cursor)
+    # print(len(idDisponibles)) # El numero de disponibles a este punto le sobran 8 ids, esto es a causa de los duplicados en la tabla sucursales.
+    direccionCliente(idDisponibles,cursor)
+   
 
 
 #Se destaca que la ejecucion debe ser en el orden explicitado dado que de lo contario habran fallas en la ejecucion por la necesidad de que existan valores previos o bien referencias a tablas existentes. Vease el resultado del diagrama entidad-relacion en la carpeta assets o bien en el readme.
@@ -131,7 +185,7 @@ if __name__ == "__main__":
     asignarTarjeta(cursor)
 
     #Asigna los valores de customer_addres_id a cada cliente y a cada empleado.
-    #asignarDireccion(cursor)
+    asignarDireccion(cursor)
 
     """Ultima etapa generacion de datos en la BD, Se crean los datos de tarjeta de credito, corregir el formato de fechas de la tabla empleados, Se crean los datos random de Las FK nuevas por las nuevas tablas."""
     F_path = "n"
