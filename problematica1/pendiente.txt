@@ -1,2 +1,10 @@
 Cargar una tanda mas de datos de direccion, idem datos tarjeta de credito.
 Crear un trigger que dispare antes de hacer el ultimo update en el sql resolucion actual.
+
+#Agregar una carpeta de src para permitir agrear la bd desde 0 o una similar si asi lo deseara alguien, se debera partir de las mismas condiciones que la inicial.
+#Reintegrar la resolucion de la tarea 3 que hizo elias, creo qeu la elimine sin querer.
+#documentacion
+#consultar si falta algo de la problemtica 4
+#revisar que corran todas las resoluciones
+#recomendar realizar la ejecucion comenzando necesariamente por la problematica 1, para trabajar sobre la BD Reestruturada y completa
+#considerar agregar mas de una direccion a algunos empleados o clientes, como tuplas
