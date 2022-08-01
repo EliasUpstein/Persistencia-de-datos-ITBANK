@@ -1,0 +1,1 @@
+--Obtener el promedio de créditos otorgado por sucursal

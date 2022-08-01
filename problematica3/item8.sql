@@ -1,4 +1,5 @@
 --Octavo Item
+--Seleccionar los préstamos que tengan fecha en abril, junio y agosto, ordenándolos por importe
 SELECT * FROM prestamo 
 WHERE 
 	substr(loan_date, 6,2) = "04" or 

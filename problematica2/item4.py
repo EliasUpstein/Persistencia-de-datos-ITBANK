@@ -1,3 +1,6 @@
+# Dado el siguiente JSON. Insertar 5 nuevos clientes en la base de datos y verificar que se haya 
+# realizado con éxito la inserción
+
 import json
 import sqlite3
 
