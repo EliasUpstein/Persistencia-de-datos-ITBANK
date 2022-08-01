@@ -105,7 +105,7 @@ def direccionEmpleado(disponible, cursor):
         if indice < 10:
             print(sql)
         cursor.execute(sql)
-        disponible.remove(value)
+        disponible.remove(value) #Esto es un error, esta eliminando valores correctamente pero termina moviendo el indice de posicion, por lo cual es mejor terminar el ciclo y despues eliminar los valores utilizados, ocurre tanto en la asignacion a clientes como a empleados.
         indice = indice + 1
 
 #Asigna una parte de los ids disponibles a la FK de la tabla cliente
@@ -118,7 +118,7 @@ def direccionCliente(disponible, cursor):
     while indice < len(customer_address_id):
         #Hay que identificar que los valores que trajo customer_id son tuplas de un unico valor.
         value = disponible[indice] 
-        print (value)
+        #print (value)
         sql = f''' 
                 UPDATE cliente SET customer_address_id = {value}
                 WHERE customer_id IN 
@@ -128,7 +128,7 @@ def direccionCliente(disponible, cursor):
         if indice < 10:
             print(sql)
         cursor.execute(sql)
-        #disponible.remove(value)
+        #disponible.remove(value)   #Esto es un error, esta eliminando valores correctamente pero termina moviendo el indice de posicion, por lo cual es mejor terminar el ciclo y despues eliminar los valores utilizados, ocurre tanto en la asignacion a clientes como a empleados.
         indice = indice + 1
 
 

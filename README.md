@@ -3,12 +3,6 @@ Este repositorio es una manipulacion y actualizacion a una base de datos propues
 
 
 
-
-
-
-El banco cuenta con un sistema TPS `Sistema de Procesamiento de Transacciones` que tiene como principal función enviar las transacciones ocurridas, diferenciando si fueron aceptadas o no, `sin indicar la razón`.
-Se busca automatizar el procesamiento de los datos emitidos por el TPS.
-
 ## Table of contents
   - [Problematica](#problematica)
   - [Detalles del desafio](#detalles-del-desafio)
