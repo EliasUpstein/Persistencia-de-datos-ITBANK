@@ -2,12 +2,12 @@ from importlib.resources import path
 import sqlite3
 import os
 
-
 def exSql(path):
     file = open(path, 'r')
-    data = file.read()
-    cursor.execute(data)
-
+    data = file.readlines()
+    sqlString = " ".join(data)
+    print(sqlString)
+    cursor.executescript(sqlString)
 
 
 #La siguiente ejecucion permite vincular los datos de tipo de cliente de cada cliente en la tabla cuenta, dado que un cliente classic solo puede tener una caja en pesos, a diferencia del cliente classic que puede tener caja en dolares
