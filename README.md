@@ -35,13 +35,14 @@ modelo de datos permite conocer:
 
 ## Problematica 1
 Se solicita reestructurar la Base de Datos.
-Se partio de una BD que consta de 5 tablas:
+Se partio de una `BD` que consta de 5 tablas:
   - Cliente
   - Prestamos 
   - Cuenta
   - Sucursal
   - Empleado
 Estas tablas tienen sus campos Foreign Key `FK` creados pero sin su restriccion asignada.  
+`Ver los requerimientos.`
 
 ### Requerimientos 1
 - Se debe crear en la base de datos los `tipos de cliente`, `tipo de cuenta` y `marcas de tarjeta`. Ademas, agregar la entidad `Tarjeta` y `Direccion`.
@@ -59,6 +60,18 @@ Estas tablas tienen sus campos Foreign Key `FK` creados pero sin su restriccion 
     - 500 direcciones, asignando del lote inicial a empleados, clientes o sucursal de forma aleatoria. 
 
 - Por ultimo, es necesario generar los datos que correspondientes a todos lo `FK` nuevos correspondientes a las nuevas tablas.
+
+## Problematica 2
+Una vez realizado los cambios en la base de datos, se pide entregar un archivo SQL con los siguientes requerimientos de consulta frecuente:
+
+Crear una vista con las columnas `id`, `numero sucursal`, `nombre`, `apellido`, `DNI` y `edad` de la tabla `cliente`, calculada a partir de la `fecha de nacimiento`.
+  - Mostrar las columnas de los clientes, ordenadas por el DNI de menor a mayor y cuya edad sea superior a 40 años.
+  - Mostrar todos los clientes que se llaman “Anne” o “Tyler” ordenados por edad de menor a mayor
+
+Dado el `JSON` suministrado en la carpeta `data`. Insertar 5 nuevos clientes en la base de datos y verificar que se haya realizado con éxito la inserción. 
+  - Actualizar 5 clientes recientemente agregados en la base de datos dado que hubo un error en el JSON que traía la información, la sucursal de todos es la 10.
+  - Eliminar el registro correspondiente a “Noel David” realizando la selección por el nombre y apellido.
+  - Consultar sobre cuál es el tipo de préstamo de mayor importe.
 
 ## Detalles del desafio
 ### Tipos de clientes
