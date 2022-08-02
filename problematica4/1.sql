@@ -5,7 +5,7 @@
 
 --Devuelve filtrando por nombre
 SELECT branch_name, count(customer_id) as customer_count 
-FROM cliente JOIN sucursal ON cliente.branch_id = sucursal.branch_id
+FROM cliente INNER JOIN sucursal ON cliente.branch_id = sucursal.branch_id
 GROUP BY branch_name ORDER BY customer_count DESC;
 
 --Devuelve filtrando por número
