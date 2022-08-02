@@ -74,6 +74,17 @@ Dado el `JSON` suministrado en la carpeta `data`. Insertar 5 nuevos clientes en 
   - Consultar sobre cuál es el tipo de préstamo de mayor importe.
 
 ## Problematica 3
+Realice las siguientes consultas y operaciones individuales en archivos `SQL`:
+- Seleccionar las cuentas con saldo negativo.
+- Seleccionar el nombre, apellido y edad de los clientes que tengan en el apellido la letra Z.
+- Seleccionar el nombre, apellido, edad y nombre de sucursal de las personas cuyo nombre sea “Brendan”, el resultado ordenarlo por nombre de sucursal.
+- Seleccionar de la tabla de préstamos, los préstamos con un importe mayor a $80.000 y los préstamos prendarios utilizando la unión de tablas/consultas (recordar que en las bases de datos la moneda se guarda como integer, en este caso con 2 centavos).
+- Seleccionar los prestamos cuyo importe sea mayor que el importe medio de todos los prestamos.
+- Contar la cantidad de clientes menores a 50 años.
+- Seleccionar las primeras 5 cuentas con saldo mayor a 8.000$.
+- Seleccionar los préstamos que tengan fecha en abril, junio y agosto, ordenándolos por importe.
+- Obtener el importe total de los prestamos agrupados por tipo de préstamos. Por cada tipo de préstamo de la tabla préstamo, calcular la suma de sus importes. Renombrar la columna como loan_total_accu.
+
 
 ## Problematica 4
 
