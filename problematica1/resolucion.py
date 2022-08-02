@@ -150,7 +150,7 @@ def pausarEjecucion():
 #Se destaca que la ejecucion debe ser en el orden explicitado dado que de lo contrario habran fallas en la ejecucion por la necesidad de que existan valores previos o bien referencias a tablas existentes. Vease el resultado del diagrama entidad-relacion en la carpeta assets o bien en el readme.
 #Se destaca que el programa corre unicamente si se escriben los path de los archivo con el divisor '/'. Mas adelante se encarara resolver el conflicto con el modulo os.
 if __name__ == "__main__":
-    pausar = 0 #Si vale 0 permite ver cada ejecucion.
+    pausar = 1 #Si vale 1 permite pausar entre cada ejecucion.
 
     #Creamos la coneccion con la bd
     connection = sqlite3.connect('itbank.db')
