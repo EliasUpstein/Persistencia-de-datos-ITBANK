@@ -54,3 +54,6 @@ END;
 UPDATE cuenta
 SET balance = balance - 100
 WHERE account_id BETWEEN 10 AND 14;
+
+--Verficiación funcionamiento del trigger
+SELECT * FROM auditoria_cuenta;

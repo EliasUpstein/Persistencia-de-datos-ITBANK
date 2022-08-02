@@ -13,6 +13,8 @@ CREATE TABLE movimientos (
     changed_at TEXT NOT NULL);
 
 --Transferencia
+BEGIN TRANSACTION;
+
 UPDATE cuenta
 SET balance = balance - 1000
 WHERE account_id = 200;
@@ -20,6 +22,8 @@ WHERE account_id = 200;
 UPDATE cuenta
 SET balance = balance + 1000
 WHERE account_id = 400;
+
+COMMIT;
 
 --Registro de la transferencia
 INSERT INTO movimientos(account_id,operation_tipe,amount,changed_at) 
