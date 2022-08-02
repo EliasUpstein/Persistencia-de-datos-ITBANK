@@ -12,9 +12,9 @@ modelo de datos permite conocer:
   - [Diagrama Entidad-Relacion Reestructurado](#diagrama-entidad-relacion-reestructurado)
   - [Problematica 1](#problematica-1)
     - [Requerimientos 1](#requerimientos-1)
-  - [Problematica 2](#problematica-1)
-  - [Problematica 3](#problematica-1)
-  - [Problematica 4](#problematica-1)
+  - [Problematica 2](#problematica-2)
+  - [Problematica 3](#problematica-3)
+  - [Problematica 4](#problematica-4)
   
   - [Detalles del desafio](#detalles-del-desafio)
     - Tipos de Clientes
@@ -72,6 +72,11 @@ Dado el `JSON` suministrado en la carpeta `data`. Insertar 5 nuevos clientes en 
   - Actualizar 5 clientes recientemente agregados en la base de datos dado que hubo un error en el JSON que traía la información, la sucursal de todos es la 10.
   - Eliminar el registro correspondiente a “Noel David” realizando la selección por el nombre y apellido.
   - Consultar sobre cuál es el tipo de préstamo de mayor importe.
+
+## Problematica 3
+
+## Problematica 4
+
 
 ## Detalles del desafio
 ### Tipos de clientes
