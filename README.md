@@ -11,6 +11,7 @@ modelo de datos permite conocer:
   - [Diagrama Entidad-Relacion Inicial](#diagrama-entidad-relacion-inicial)
   - [Diagrama Entidad-Relacion Reestructurado](#diagrama-entidad-relacion-reestructurado)
   - [Problematica 1](#problematica-1)
+    - [Requerimientos 1](#requerimientos-1)
   - [Problematica 2](#problematica-1)
   - [Problematica 3](#problematica-1)
   - [Problematica 4](#problematica-1)
@@ -18,6 +19,8 @@ modelo de datos permite conocer:
   - [Detalles del desafio](#detalles-del-desafio)
     - Tipos de Clientes
     - Tipos de Cuentas
+    - Atributos entidad tarjeta
+    - Direcciones
   - [Requerimientos especificos](#requerimientos-especificos)
   - [Aclaraciones y acotaciones](#aclaraciones-y-acotaciones)
     - [Referencias](#referencias)
@@ -40,41 +43,22 @@ Se partio de una BD que consta de 5 tablas:
   - Empleado
 Estas tablas tienen sus campos Foreign Key `FK` creados pero sin su restriccion asignada.  
 
+### Requerimientos 1
 - Se debe crear en la base de datos los `tipos de cliente`, `tipo de cuenta` y `marcas de tarjeta`. Ademas, agregar la entidad `Tarjeta` y `Direccion`.
-- La entidad `tarjeta` debe contener los atributos necesarios para la operación del home banking: 
-      - Numero (único e irrepetible, con una restricción ante cada inserción que no debe superar 20 números/espacios)
-      - CVV
-      - Fecha de otorgamiento
-      - Fecha Expiración
-      - Tarjeta de crédito o débito.
+- Se debe corregir el problema actual de no tener asignada la `restriccion de FK` en las tablas iniciales.
+- Se debera ingresar parte de los nuevos valores según la información provista en el Sprint 5, se detalla en el apartado [Detalles del desafio](#detalles-del-desafio).
+- Se necesita ampliar el alcance de la entidad `cuenta` para que identifique el `tipo` de la misma.
+- Corregir el campo employee_hire_date de la tabla empleado con la fecha en formato YYYY-MM-DD.
 
-- Se debe corregir el problema actual de no tener asignada la restriccion de FK en las tablas iniciales.
-- Se debera ingresar parte de los nuevos valores según la información provista en el Sprint 5.
+- Es necesario crear las siguientes relaciones mediante FK:
+    - Las tarjetas con las marcas de tarjeta
+    - Las tarjetas con el cliente al que pertenecen
 
-- Agregar la entidad tarjeta teniendo en cuenta los atributos
-necesarios para la operación del home banking (se sugieren los
-siguientes campos Numero (único e irrepetible, con una restricción
-ante cada inserción que no debe superar 20 números/espacios), CVV,
-Fecha de otorgamiento, Fecha Expiración). Almacenar si es una
-tarjeta de crédito o débito.
-- Relacionar las tarjetas con la tabla donde se guardan las marcas de
-tarjeta
-- Relacionar las tarjetas con el cliente al que pertenecen
-- Insertar 500 tarjetas de crédito con sus respectivos datos
-(www.generatedata.com) asociándolas a los clientes de forma
-aleatoria
-- Agregar la entidad direcciones, que puede ser usada por los clientes,
-empleados y sucursales con los campos utilizados en el SPRINT 5
-- Insertar 500 direcciones, asignando del lote inicial a empleados,
-clientes o sucursal de forma aleatoria. Teniendo en cuenta que un
-cliente o empleado puede tener múltiples direcciones, pero la
-sucursal, solo una.
-- Ampliar el alcance de la entidad cuenta para que identifique el tipo de
-la misma
-- Asignar un tipo de cuenta a cada registro de cuenta de forma
-aleatoria
-- Corregir el campo employee_hire_date de la tabla empleado con la
-fecha en formato YYYY-MM-DD
+- Es necesario insertar:  
+    - 500 tarjetas de crédito con sus respectivos datos asociándolas a los clientes de forma aleatoria.
+    - 500 direcciones, asignando del lote inicial a empleados, clientes o sucursal de forma aleatoria. 
+
+- Por ultimo, es necesario generar los datos que correspondientes a todos lo `FK` nuevos correspondientes a las nuevas tablas.
 
 ## Detalles del desafio
 ### Tipos de clientes
@@ -111,29 +95,29 @@ fecha en formato YYYY-MM-DD
   - Caja de ahorro en dólares
   - Cuenta Corriente
 
+### Atributos entidad Tarjeta
+La entidad `tarjeta` debe contener los atributos necesarios para la operación del home banking: 
+      - Numero (único e irrepetible, con una restricción ante cada inserción que no debe superar 20 números/espacios)
+      - CVV
+      - Fecha de otorgamiento
+      - Fecha Expiración
+      - Tarjeta de crédito o débito.
+
+### Direcciones
+La entidad `direccion` puede ser usada por los `clientes`, `empleados` y sucursales con los campos utilizados en el SPRINT 5:
+ - Calle
+ - Numero
+ - Ciudad
+ - Provincia
+ - Pais
+Tener en cuenta que un cliente o empleado puede tener múltiples direcciones, pero la sucursal, solo una. 
+A su vez, las direcciones que ocupen las sucursales son exclusivas, a diferencia de las ocupadas por clientes o empleados que se pueden contemplar excepciones, tales como que haya familiares de compartan domicilio dentro de una de las tablas o dentro de ambas.
+
 ## Requerimientos especificos
-
-El equipo de arquitectura de TI del ITBANK estableció los siguientes `principios`:
-  - Se debe utilizar `programación orientada a objetos` para generar la nueva aplicación.
-  - Existe un diagrama de clases estándar en la compañía que sirve como guía, por lo que se pueden cambiar para cubrir las necesidades del proyecto.
-  - Para los cálculos que se realizan en funciones que se implementaron, se tiene que llamar al paquete o módulo y ejecutarlas.
-  - Se puede utilizar una librería para generar el HTML o implementar las clases para generarlo.
-  - Se debe validar que los archivos JSON estén correctamente formateados.
-
-El reporte emitido debe incluir:
-  - Nombre de cliente
-  - Número
-  - DNI
-  - Dirección 
-  - Fecha de cada transaccion
-  - Tipo de operacion y su estado
-  - Monto y razon por la cual se rechazo, `vacío en caso de ser aceptada`
-
-Se pide que el reporte sea una `página en HTML` válida de forma que el browser estándar del banco lo pueda interpretar y visualizar.
-La salida del sistema TPS es un `archivo JSON` con las transacciones que debemos procesar.
+Se pide resolver todas las problematicas partiendo de resoluciones en `SQL`.
   
 ## Aclaraciones y acotaciones
-
+La generacion de datos aleatoria respecto a `tipo de cuenta` en la tabla `cuenta`, o los datos suminitrados a la nueva entidad `tarjeta`; debe contemplar que no todos los `clientes` estan habilitados a tener cualquier tipo de tarjeta o cualquier tipo de cuenta dado que esto se restringe al relacionarse con el `tipo de cliente` que el mismo es.
 
 ### Referencias
 - [Generador de valores](https://generatedata.com/)
